@@ -48,29 +48,40 @@ public class AgreementService {
 		Company myCompany =  new Company(null, null);
 		Company counterPartyCompany = new Company(null, null);
 		String textFragment = new String();
-		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) {
+		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) {															//Finding the specific agreement
 			if(AgreementRepository.agreementRepositoryList.get(i).getMyComany().equals(myCompany) 
 					&& AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().equals(counterPartyCompany)) {
-				for(int j=0;j<AgreementRepository.agreementRepositoryList.get(i).getScansList().size();j++) {
-					Boolean textCheck = AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFileText().toUpperCase().contains(textFragment.toUpperCase());
+				for(int j=0;j<AgreementRepository.agreementRepositoryList.get(i).getScansList().size();j++) {							//Searching in the scansText the TextFragment
+					Boolean textCheck = AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFileText().toUpperCase().contains(textFragment.toUpperCase()); //Checking the TextFRagment in the scanText
 					if(textCheck==true) {
 						System.out.println("This text: " + textFragment + "is in this agreement scan fileName " + AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFileName());
 					}
 				}
 			}
 		}
-}
+	}
+	
 	public void getPageCount() {					//Given a contract, get the total page count based on the scans contained in the contract.
-		
-		
-		
-		
+		Company myCompany =  new Company(null, null);
+		Company counterPartyCompany = new Company(null, null);
+		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) {																	//Finding the specific agreement
+			if(AgreementRepository.agreementRepositoryList.get(i).getMyComany().equals(myCompany) 
+					&& AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().equals(counterPartyCompany)) {
+				Integer pageCounter = 0;
+				for(int j=0;j<AgreementRepository.agreementRepositoryList.get(i).getScansList().size();j++) {
+					pageCounter = pageCounter + AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFilePageCount();	//adding the page contained in the scans files
+				}
+				System.out.println("This agreement have: " + pageCounter + " pages");
+			}
+		}
 	}
 		
 	
 	public void findFileListName () {				//Given a list of contracts and a company id: get a list of the file names from all the scans
 													//contained in contracts where the company acting as “My Company” matches the input
 													//id.
+		
+		
 		
 	}
 	
