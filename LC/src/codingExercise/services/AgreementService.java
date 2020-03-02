@@ -3,9 +3,11 @@ package codingExercise.services;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import codingExercise.domains.Agreements;
 import codingExercise.domains.Company;
 import codingExercise.domains.Scans;
 import codingExercise.repositories.AgreementRepository;
@@ -97,8 +99,18 @@ public class AgreementService {
 	public void mapCounterpartyIDAgreements () {	//Given a list of contracts, group them by counterparty company and return a map
 													//structure so that the key is counterparty id and the value is the list of contracts for that
 													//company.
-		
+		HashMap<String,List<Agreements>> counterpartyCompanyVsListOfContracts = new HashMap<>();
+        for (int i=0; i<AgreementRepository.agreementRepositoryList.size();i++){
+            List<Agreements> listOfAgreementsByCounterpartyId = new ArrayList<>();
+            for(int j=0; j<AgreementRepository.agreementRepositoryList.size();j++) {
+            	if(AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().equals(AgreementRepository.agreementRepositoryList.get(j).getCounterpartyCompany())) {
+            		listOfAgreementsByCounterpartyId.add(AgreementRepository.agreementRepositoryList.get(j));
+            	}
+            }
+        	
+            counterpartyCompanyVsListOfContracts.put(AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().getId(),listOfAgreementsByCounterpartyId);
+            }
+        System.out.println(counterpartyCompanyVsListOfContracts);		
 	}
-	
 
 }
