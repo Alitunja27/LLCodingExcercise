@@ -9,7 +9,7 @@ import codingExercise.domains.Scans;
 
 public class AgreementRepository {
 	
-	static List<Agreements> agreementRepositoryList = new ArrayList<>();
+	public static List<Agreements> agreementRepositoryList = new ArrayList<>();
 	
 	public static void addDataToAgreementRepositoryList () {
 		
@@ -17,10 +17,10 @@ public class AgreementRepository {
 		Company company2 = CompanyRepository.companyRepositoryList.get(1);
 		Company company3 = CompanyRepository.companyRepositoryList.get(2);
 		Company company4 = CompanyRepository.companyRepositoryList.get(3);
-		Scans scan1 = CompanyScans.companyScansLists.get(0);
-		Scans scan2 = CompanyScans.companyScansLists.get(1);
-		Scans scan3 = CompanyScans.companyScansLists.get(2);
-		Scans scan4 = CompanyScans.companyScansLists.get(3);
+		Scans scan1 = ScansRepository.companyScansLists.get(0);
+		Scans scan2 = ScansRepository.companyScansLists.get(1);
+		Scans scan3 = ScansRepository.companyScansLists.get(2);
+		Scans scan4 = ScansRepository.companyScansLists.get(3);
 		List<Scans> scanList1 = new ArrayList<>();
 		scanList1.add(scan1);
 		scanList1.add(scan2);

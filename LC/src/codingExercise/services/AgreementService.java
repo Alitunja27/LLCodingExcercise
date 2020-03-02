@@ -1,13 +1,46 @@
 package codingExercise.services;
 
+
+
+import java.util.Scanner;
+
+import codingExercise.domains.Company;
+import codingExercise.domains.Scans;
+import codingExercise.repositories.AgreementRepository;
+
 public class AgreementService {
 		
-	public void addScans () { 	 					//add scans from an agreement
+	public void addScans () { 	 												//add scans from an agreement
+		Company myCompany =  new Company(null, null);
+		Company counterPartyCompany = new Company(null, null);
+		Scans newScan = new Scans(null, null, null);
+		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) { //for: to find the companies in agreement (agreement ReposirtoryList) so we can add a new scan
+			if(AgreementRepository.agreementRepositoryList.get(i).getMyComany().equals(myCompany) 
+					&& AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().equals(counterPartyCompany)) {
+				AgreementRepository.agreementRepositoryList.get(i).getScansList().add(newScan);
+			}
+		}
 		
 	}
 	
-	public void deleteScans () {  					//remove scans from an agreement
-		
+	@SuppressWarnings("resource")
+	public void deleteScans () {  																														//remove scans from an agreement
+		Company myCompany =  new Company(null, null);
+		Company counterPartyCompany = new Company(null, null);
+		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) { //for: to find the companies in agreement (agreement ReposirtoryList) so we can show the Scans to delete it
+			if(AgreementRepository.agreementRepositoryList.get(i).getMyComany().equals(myCompany) 
+					&& AgreementRepository.agreementRepositoryList.get(i).getCounterpartyCompany().equals(counterPartyCompany)) {
+				System.out.println("Wich one of this Scans you want to delete?" + AgreementRepository.agreementRepositoryList.get(i).getScansList());  	//Show the Scans List
+				System.out.println("Please write the fileName:");
+				String scanFileNameToBeDeleted = new Scanner(System.in).nextLine();																		//Read the file to be deleted
+				for(int j=0;j<AgreementRepository.agreementRepositoryList.get(i).getScansList().size();j++) {											//Finding the file to be deleted in the scan List
+					if(AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFileName().equalsIgnoreCase(scanFileNameToBeDeleted)) {
+						AgreementRepository.agreementRepositoryList.get(i).getScansList().remove(j);
+					}
+				}
+			}
+		}
+				
 	}
 	
 	public void getPageCount() {					//Given a contract, get the total page count based on the scans contained in the contract.

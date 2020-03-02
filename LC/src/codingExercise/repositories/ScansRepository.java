@@ -5,7 +5,7 @@ import java.util.List;
 
 import codingExercise.domains.Scans;
 
-public class CompanyScans {
+public class ScansRepository {
 	
 	static List<Scans> companyScansLists = new ArrayList<>();
 	
