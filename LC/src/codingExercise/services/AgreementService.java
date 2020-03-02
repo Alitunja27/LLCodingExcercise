@@ -2,6 +2,8 @@ package codingExercise.services;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import codingExercise.domains.Company;
@@ -80,9 +82,16 @@ public class AgreementService {
 	public void findFileListName () {				//Given a list of contracts and a company id: get a list of the file names from all the scans
 													//contained in contracts where the company acting as “My Company” matches the input
 													//id.
-		
-		
-		
+		String myCompanyId = new String();
+		List<String> fileNameList = new ArrayList<>();
+		for(int i=0;i<AgreementRepository.agreementRepositoryList.size();i++) {																	//Finding the specific agreement
+			if(AgreementRepository.agreementRepositoryList.get(i).getMyComany().getId().toUpperCase().contains(myCompanyId.toUpperCase())){		//searching the Id as myCompany in the List of agreements
+				for(int j=0;j<AgreementRepository.agreementRepositoryList.get(i).getScansList().size();j++) {
+					fileNameList.add(AgreementRepository.agreementRepositoryList.get(i).getScansList().get(j).getFileName());					//Adding the fileName to the fileNameList
+				}
+			}	
+		}
+		System.out.println("File name List containing this Id: " + myCompanyId + " List: " + fileNameList);
 	}
 	
 	public void mapCounterpartyIDAgreements () {	//Given a list of contracts, group them by counterparty company and return a map
